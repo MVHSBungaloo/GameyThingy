@@ -17,11 +17,6 @@ import org.newdawn.slick.opengl.ImageIOImageData;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-
-/**
- *
- * @author Brandon Apana
- */
 public class LWJGL3D 
 {
     
@@ -34,7 +29,8 @@ public class LWJGL3D
     }
     
     
-    public static Texture loadTexturePNG(String key)
+    //Pass in the name of a .png file (without the file extension!) and it will attempt to load a .png in the "res" folder (under project root) with the same name
+    public static Texture loadTexturePNG(String key) //Having both loadTexturePNG and loadTextureJPG active at the same time may be the cause of some odd behavior I've seen
     {      
         try 
         {
@@ -47,7 +43,7 @@ public class LWJGL3D
         
         return null;
     }
-    
+    //Pass in the name of a .jpg file (without the file extension!) and it will attempt to load a .jpg in the "res" folder (under project root) with the same name
         public static Texture loadTextureJPG(String key)
     {      
         try 
@@ -62,7 +58,8 @@ public class LWJGL3D
         return null;
     }
         
-    public ByteBuffer loadIcon(String filename, int width, int height) throws IOException 
+//Failed attempt to get an icon to appear for the game (LWJGL makes it a little hard)
+    /* public ByteBuffer loadIcon(String filename, int width, int height) throws IOException 
     {
         BufferedImage image = ImageIO.read(new File(filename)); // load image
 
@@ -78,12 +75,11 @@ public class LWJGL3D
         }
         return ByteBuffer.wrap(imageBytes);
     }
-    
+    */
     
     public static void gameLoop()
     {
         Texture kappa = loadTextureJPG("kappa"); //textures need to be square and a multiple of 2!!!
-        Texture wood = loadTexturePNG("wood"); //textures need to be square and a multiple of 2!!!
         
         Camera cam = new Camera(70,(float)Display.getWidth()/(float)Display.getHeight(),0.3f,1000);
         float x = 0;
@@ -125,19 +121,10 @@ public class LWJGL3D
                 glColor3f(1.0f,0.5f,0f);
                 glTranslatef(0,0,-10);
                 glRotatef(x,1,1,0);
-                kappa.bind();
-                
-                /*
-                if(forward && left || (forward && right) || (backward && left) || (backward && right))
-                {
-                    temp = true;
-                }
-            
-                if (temp)
-                    glRotatef(45,0,1,0);
-                */
+                kappa.bind(); //binds texture to the following square faces
                 
                 
+                //Draws the cube
                 glBegin(GL_QUADS);
                 {
                     //FrontFace
