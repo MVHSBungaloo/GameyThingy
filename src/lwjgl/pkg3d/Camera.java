@@ -1,9 +1,4 @@
 package lwjgl.pkg3d;
-
-/**
- *
- * @author Brandon Apana
- */
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
@@ -119,6 +114,7 @@ public class Camera
 
     public void move(float amt, float dir)
     {
+        //the scary math keeps panning direction more consistant while changing rotation, etc.
         z += amt * Math.sin(Math.toRadians(ry + 90 * dir));
         x += amt * Math.cos(Math.toRadians(ry + 90 * dir));
     }
